@@ -1,15 +1,436 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* CSS Custom Properties for Hyper-Modern 2026 Design - Light Mode */
+:root {
+  --glass-blur: 40px;
+  --glass-saturation: 180%;
+  --glass-bg-light: rgba(255, 255, 255, 0.85);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(99, 102, 241, 0.15);
+  --glass-border-hover: rgba(99, 102, 241, 0.3);
+  --glow-primary: rgba(99, 102, 241, 0.2);
+  --glow-secondary: rgba(168, 85, 247, 0.2);
+  --glow-accent: rgba(6, 182, 212, 0.15);
+  --super-ellipse: 32px;
+  --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 50%, #f5f7fa 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  color-scheme: light;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+/* Animated Mesh Gradient Background - Light Mode */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 60% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: meshGradientShift 20s ease-in-out infinite;
+}
+
+@keyframes meshGradientShift {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Glassmorphism 2.0 - Light Mode */
+.glass-2026 {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 8px 32px rgba(99, 102, 241, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.glass-2026-hover:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow:
+    0 20px 60px rgba(99, 102, 241, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Super-Ellipse Card Styling */
+.super-ellipse {
+  border-radius: var(--super-ellipse);
+}
+
+/* Interactive Glow Effect */
+.interactive-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s var(--transition-smooth);
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--glow-primary),
+    transparent 40%
+  );
+}
+
+.interactive-glow:hover::before {
+  opacity: 1;
+}
+
+/* Card Glow Border Animation */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: calc(var(--super-ellipse) + 1px);
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.5),
+    rgba(168, 85, 247, 0.5),
+    rgba(6, 182, 212, 0.5),
+    rgba(99, 102, 241, 0.5)
+  );
+  background-size: 300% 300%;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s var(--transition-smooth);
+  animation: gradientBorderRotate 4s ease infinite;
+}
+
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+@keyframes gradientBorderRotate {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Pill-shaped Floating Search Bar - Light Mode */
+.pill-search {
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  box-shadow:
+    0 4px 24px rgba(99, 102, 241, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.pill-search:hover,
+.pill-search:focus-within {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow:
+    0 8px 40px rgba(99, 102, 241, 0.15),
+    0 0 0 1px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+}
+
+/* Linear.app Inspired Smooth Animations */
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(99, 102, 241, 0.3),
+      0 0 40px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(99, 102, 241, 0.5),
+      0 0 60px rgba(99, 102, 241, 0.2);
+  }
+}
+
+@keyframes floatUp {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+/* Bento Grid Animation Classes */
+.bento-item {
+  animation: slideUpFadeIn 0.6s var(--transition-smooth) backwards;
+}
+
+.bento-item:nth-child(1) {
+  animation-delay: 0ms;
+}
+.bento-item:nth-child(2) {
+  animation-delay: 50ms;
+}
+.bento-item:nth-child(3) {
+  animation-delay: 100ms;
+}
+.bento-item:nth-child(4) {
+  animation-delay: 150ms;
+}
+.bento-item:nth-child(5) {
+  animation-delay: 200ms;
+}
+.bento-item:nth-child(6) {
+  animation-delay: 250ms;
+}
+.bento-item:nth-child(7) {
+  animation-delay: 300ms;
+}
+.bento-item:nth-child(8) {
+  animation-delay: 350ms;
+}
+.bento-item:nth-child(9) {
+  animation-delay: 400ms;
+}
+.bento-item:nth-child(10) {
+  animation-delay: 450ms;
+}
+.bento-item:nth-child(11) {
+  animation-delay: 500ms;
+}
+.bento-item:nth-child(12) {
+  animation-delay: 550ms;
+}
+
+/* Smooth hover transitions */
+.card-hover-lift {
+  transition:
+    transform 0.4s var(--transition-smooth),
+    box-shadow 0.4s var(--transition-smooth),
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-12px) scale(1.02);
+}
+
+/* Avatar float animation */
+.avatar-float {
+  transition:
+    transform 0.5s var(--transition-bounce),
+    box-shadow 0.4s var(--transition-smooth);
+}
+
+.avatar-float:hover {
+  transform: translateY(-8px) scale(1.1);
+}
+
+/* Button interactions */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+  transition:
+    width 0.5s var(--transition-smooth),
+    height 0.5s var(--transition-smooth);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.btn-glow:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* FAB Pulse Animation */
+.fab-pulse {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.fab-pulse:hover {
+  animation: none;
+  transform: scale(1.1);
+}
+
+/* Shimmer loading effect - Light Mode */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(99, 102, 241, 0) 0%,
+    rgba(99, 102, 241, 0.1) 50%,
+    rgba(99, 102, 241, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Text gradient animation */
+.text-gradient-animated {
+  background: linear-gradient(
+    135deg,
+    #6366f1 0%,
+    #a855f7 25%,
+    #06b6d4 50%,
+    #a855f7 75%,
+    #6366f1 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 4s linear infinite;
+}
+
+@keyframes gradientText {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Noise texture overlay for depth */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Scrollbar styling for modern look - Light Mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.4);
+}
+
+/* Selection styling - Light Mode */
+::selection {
+  background: rgba(99, 102, 241, 0.2);
+  color: #1a202c;
+}
+
+/* Focus ring for accessibility */
+*:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.5);
+  outline-offset: 2px;
 }
