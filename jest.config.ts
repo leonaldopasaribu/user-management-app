@@ -19,18 +19,31 @@ const config: Config = {
           allowSyntheticDefaultImports: true,
           verbatimModuleSyntax: false,
           module: 'ESNext',
+          target: 'ESNext',
           moduleResolution: 'bundler',
         },
         useESM: true,
+        diagnostics: {
+          ignoreCodes: [1343],
+        },
       },
     ],
   },
   moduleNameMapper: {
+    '^~/config/env$': '<rootDir>/__mocks__/env.ts',
     '^~/(.*)$': '<rootDir>/app/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  globals: {
+    'import.meta': {
+      env: {
+        VITE_API_BASE_URL: 'https://jsonplaceholder.typicode.com',
+        VITE_AVATAR_BASE_URL: 'https://picsum.photos/seed',
+      },
+    },
+  },
   collectCoverageFrom: [
     'app/**/*.{ts,tsx}',
     '!app/**/*.d.ts',
