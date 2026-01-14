@@ -8,7 +8,6 @@ import userReducer, {
 import type { UserState } from './userSlice';
 import type { User } from '~/types/user.types';
 
-// Mock fetch
 global.fetch = jest.fn();
 
 describe('userSlice', () => {
@@ -48,17 +47,17 @@ describe('userSlice', () => {
   });
 
   describe('reducers', () => {
-    it('should return the initial state', () => {
+    it('should return the initial state when reducer is called with undefined state', () => {
       expect(userReducer(undefined, { type: 'unknown' })).toEqual(initialState);
     });
 
-    it('should handle addUser', () => {
+    it('should add user when addUser action is dispatched', () => {
       const actual = userReducer(initialState, addUser(mockUser));
       expect(actual.users).toHaveLength(1);
       expect(actual.users[0]).toEqual(mockUser);
     });
 
-    it('should handle updateUser', () => {
+    it('should update user when updateUser action is dispatched', () => {
       const stateWithUser: UserState = {
         ...initialState,
         users: [mockUser],
@@ -68,7 +67,7 @@ describe('userSlice', () => {
       expect(actual.users[0].name).toBe('Jane Doe');
     });
 
-    it('should handle deleteUser', () => {
+    it('should delete user when deleteUser action is dispatched', () => {
       const stateWithUser: UserState = {
         ...initialState,
         users: [mockUser],
@@ -77,12 +76,12 @@ describe('userSlice', () => {
       expect(actual.users).toHaveLength(0);
     });
 
-    it('should handle setSelectedUser', () => {
+    it('should set selected user when setSelectedUser action is dispatched', () => {
       const actual = userReducer(initialState, setSelectedUser(mockUser));
       expect(actual.selectedUser).toEqual(mockUser);
     });
 
-    it('should handle setSelectedUser with null', () => {
+    it('should clear selected user when setSelectedUser is called with null', () => {
       const stateWithSelectedUser: UserState = {
         ...initialState,
         selectedUser: mockUser,
@@ -93,14 +92,14 @@ describe('userSlice', () => {
   });
 
   describe('fetchUsers async thunk', () => {
-    it('should handle fetchUsers.pending', () => {
+    it('should set isLoading state when fetchUsers is pending', () => {
       const action = { type: fetchUsers.pending.type };
       const state = userReducer(initialState, action);
       expect(state.isLoading).toBe(true);
       expect(state.error).toBeNull();
     });
 
-    it('should handle fetchUsers.fulfilled', () => {
+    it('should set users when fetchUsers is fulfilled', () => {
       const users = [mockUser];
       const action = { type: fetchUsers.fulfilled.type, payload: users };
       const state = userReducer(initialState, action);
@@ -108,7 +107,7 @@ describe('userSlice', () => {
       expect(state.users).toEqual(users);
     });
 
-    it('should handle fetchUsers.rejected', () => {
+    it('should set error when fetchUsers is rejected', () => {
       const errorMessage = 'Failed to fetch users';
       const action = {
         type: fetchUsers.rejected.type,
