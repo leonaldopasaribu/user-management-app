@@ -1,62 +1,196 @@
-# Welcome to React Router!
+# 👥 User Management App
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A modern, full-stack user management application built with React Router 7 that provides comprehensive user management capabilities with a beautiful and intuitive interface.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## ✨ Features
 
-## Features
+- 👤 **Complete User CRUD** - Create, Read, Update, and Delete users with ease
+- 🔍 **Smart Search** - Quickly find users with real-time search functionality
+- 📊 **User Details Modal** - View comprehensive user information in an elegant modal
+- 📝 **Form Validation** - Robust form handling with React Hook Form
+- 🎨 **Material Design** - Beautiful UI components with Material-UI
+- 📱 **Fully Responsive** - Perfect experience on desktop, tablet, and mobile devices
+- ⚡ **State Management** - Efficient state handling with Redux Toolkit
+- 🔄 **Async Data Fetching** - Optimized API calls with loading and error states
+- 🧪 **Well Tested** - Comprehensive test coverage with Jest
+- 🚀 **Fast Performance** - Optimized with React Router 7 and Vite
+- 🌐 **SSR Ready** - Server-side rendering for better performance and SEO
+- 🎯 **TypeScript** - Full type safety across the entire codebase
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## 🛠️ Tech Stack
 
-## Getting Started
+- **Framework:** [React Router 7](https://reactrouter.com/) - Modern full-stack React framework
+- **Language:** [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- **State Management:** [Redux Toolkit](https://redux-toolkit.js.org/) - Efficient Redux development
+- **UI Library:** [Material-UI (MUI)](https://mui.com/) - React component library
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- **Form Handling:** [React Hook Form](https://react-hook-form.com/) - Performant form validation
+- **Icons:** [Material Icons](https://mui.com/material-ui/material-icons/) & [Lucide React](https://lucide.dev/)
+- **Testing:** [Jest](https://jestjs.io/) & [React Testing Library](https://testing-library.com/react)
+- **Build Tool:** [Vite](https://vite.dev/) - Next generation frontend tooling
+- **Code Quality:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
+- **Package Manager:** [pnpm](https://pnpm.io/) - Fast, disk space efficient
+
+## 📁 Project Structure
+
+```
+user-management-app/
+├── app/
+│   ├── components/          # Reusable UI components
+│   │   ├── EmptyState.tsx
+│   │   ├── ErrorState.tsx
+│   │   ├── SearchField.tsx
+│   │   ├── UserCard.tsx
+│   │   ├── UserDetailsModal.tsx
+│   │   ├── UserFormModal.tsx
+│   │   └── UserList.tsx
+│   ├── config/              # Configuration files
+│   │   └── env.ts
+│   ├── routes/              # Application routes
+│   │   └── home.tsx
+│   ├── store/               # Redux store and slices
+│   │   ├── hooks.ts
+│   │   ├── store.ts
+│   │   ├── userSlice.ts
+│   │   └── userSlice.test.ts
+│   ├── types/               # TypeScript type definitions
+│   │   └── user.types.ts
+│   ├── app.css              # Global styles
+│   └── root.tsx             # Root component
+├── public/                  # Static assets
+├── .env.example             # Environment variables example
+├── Dockerfile               # Docker configuration
+├── jest.config.ts           # Jest configuration
+├── tsconfig.json            # TypeScript configuration
+└── vite.config.ts           # Vite configuration
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- pnpm (recommended) or npm/yarn
 
 ### Installation
 
-Install the dependencies:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/leonaldopasaribu/user-management-app.git
+   cd user-management-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   # or
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   # API Configuration
+   VITE_API_BASE_URL=https://jsonplaceholder.typicode.com
+   VITE_AVATAR_BASE_URL=https://i.pravatar.cc
+   ```
+
+4. **Run the development server**
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. **Open your browser**
+   
+   Navigate to [http://localhost:5173](http://localhost:5173) to see the application.
+
+## 🧪 Testing
+
+Run the test suite:
 
 ```bash
-npm install
+pnpm test
+# or
+npm test
 ```
 
-### Development
-
-Start the development server with HMR:
+Run tests in watch mode:
 
 ```bash
-npm run dev
+pnpm test:watch
+# or
+npm run test:watch
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+Generate test coverage report:
 
 ```bash
-npm run build
+pnpm test:coverage
+# or
+npm run test:coverage
 ```
 
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
+## 🔧 Development Scripts
 
 ```bash
-docker build -t my-app .
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Start production server
+pnpm start
+
+# Type checking
+pnpm typecheck
+
+# Lint code
+pnpm lint
+
+# Fix linting issues
+pnpm lint:fix
+
+# Format code
+pnpm format
+
+# Run tests
+pnpm test
+```
+
+## 📝 Development Features
+
+The application uses:
+- **React Router 7** - Modern full-stack React framework with SSR
+- **Redux Toolkit** - Simplified Redux with best practices
+- **TypeScript** - Full type safety across the codebase
+- **React Hook Form** - Performant form validation
+- **Material-UI** - Production-ready React components
+- **Tailwind CSS** - Utility-first styling
+- **Jest & Testing Library** - Comprehensive testing
+- **ESLint & Prettier** - Code quality and consistency
+- **Vite** - Lightning-fast build tool
+
+## 🐳 Docker Deployment
+
+Build and run using Docker:
+
+```bash
+# Build the Docker image
+docker build -t user-management-app .
 
 # Run the container
-docker run -p 3000:3000 my-app
+docker run -p 3000:3000 user-management-app
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
-
+The containerized application can be deployed to any platform that supports Docker:
 - AWS ECS
 - Google Cloud Run
 - Azure Container Apps
@@ -64,24 +198,64 @@ The containerized application can be deployed to any platform that supports Dock
 - Fly.io
 - Railway
 
+## 🌐 Deployment
+
 ### DIY Deployment
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+Build the application:
 
-Make sure to deploy the output of `npm run build`
+```bash
+pnpm build
+```
 
+Deploy the following files:
 ```
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── pnpm-lock.yaml
 ├── build/
 │   ├── client/    # Static assets
 │   └── server/    # Server-side code
 ```
 
-## Styling
+Start the production server:
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+```bash
+pnpm start
+```
+
+## 📚 Learn More
+
+To learn more about the technologies used in this project:
+
+- [React Router Documentation](https://reactrouter.com/start/library) - Learn about React Router features
+- [Redux Toolkit Documentation](https://redux-toolkit.js.org/) - Modern Redux development
+- [Material-UI Documentation](https://mui.com/material-ui/) - React component library
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Utility-first CSS
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/) - TypeScript documentation
+- [React Hook Form](https://react-hook-form.com/get-started) - Form validation
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 👨‍💻 Author
+
+**Leonaldo Pasaribu**
+
+- GitHub: [@leonaldopasaribu](https://github.com/leonaldopasaribu)
+- LinkedIn: [Leonaldo Pasaribu](https://linkedin.com/in/leonaldo-pasaribu)
 
 ---
 
-Built with ❤️ using React Router.
+<div align="center">
+  Made with ❤️ using React Router 7
+</div>
