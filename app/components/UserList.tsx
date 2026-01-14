@@ -19,6 +19,7 @@ import { fetchUsers, deleteUser, setSelectedUser } from '~/store/userSlice';
 import type { User } from '~/types/user.types';
 import UserDetailsModal from './UserDetailsModal';
 import UserFormModal from './UserFormModal';
+import UserDeleteModal from './UserDeleteModal';
 import UserCard from './UserCard';
 import SearchField from './SearchField';
 import EmptyState from './EmptyState';
@@ -32,7 +33,9 @@ const UserList: React.FC = () => {
 
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [formModalOpen, setFormModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [deletingUser, setDeletingUser] = useState<User | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -52,8 +55,16 @@ const UserList: React.FC = () => {
 
   const handleDeleteUser = (userId: number, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    if (window.confirm('Are you sure you want to delete this user?')) {
-      dispatch(deleteUser(userId));
+    const user = users.find(u => u.id === userId);
+    if (user) {
+      setDeletingUser(user);
+      setDeleteModalOpen(true);
+    }
+  };
+
+  const confirmDeleteUser = () => {
+    if (deletingUser) {
+      dispatch(deleteUser(deletingUser.id));
     }
   };
 
@@ -229,6 +240,12 @@ const UserList: React.FC = () => {
           open={formModalOpen}
           onClose={() => setFormModalOpen(false)}
           editingUser={editingUser}
+        />
+        <UserDeleteModal
+          open={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          onConfirm={confirmDeleteUser}
+          user={deletingUser}
         />
       </Container>
     </Box>
