@@ -1,5 +1,17 @@
 import '@testing-library/jest-dom';
 
+// Mock import.meta.env
+Object.defineProperty(global, 'import', {
+  value: {
+    meta: {
+      env: {
+        VITE_API_BASE_URL: 'https://jsonplaceholder.typicode.com',
+        VITE_AVATAR_BASE_URL: 'https://picsum.photos/seed',
+      },
+    },
+  },
+});
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
