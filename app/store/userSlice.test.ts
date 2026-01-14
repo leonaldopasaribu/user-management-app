@@ -38,7 +38,7 @@ describe('userSlice', () => {
 
   const initialState: UserState = {
     users: [],
-    loading: false,
+    isLoading: false,
     error: null,
     selectedUser: null,
   };
@@ -96,7 +96,7 @@ describe('userSlice', () => {
     it('should handle fetchUsers.pending', () => {
       const action = { type: fetchUsers.pending.type };
       const state = userReducer(initialState, action);
-      expect(state.loading).toBe(true);
+      expect(state.isLoading).toBe(true);
       expect(state.error).toBeNull();
     });
 
@@ -104,7 +104,7 @@ describe('userSlice', () => {
       const users = [mockUser];
       const action = { type: fetchUsers.fulfilled.type, payload: users };
       const state = userReducer(initialState, action);
-      expect(state.loading).toBe(false);
+      expect(state.isLoading).toBe(false);
       expect(state.users).toEqual(users);
     });
 
@@ -115,7 +115,7 @@ describe('userSlice', () => {
         error: { message: errorMessage },
       };
       const state = userReducer(initialState, action);
-      expect(state.loading).toBe(false);
+      expect(state.isLoading).toBe(false);
       expect(state.error).toBe(errorMessage);
     });
   });

@@ -12,6 +12,14 @@ Object.defineProperty(global, 'import', {
   },
 });
 
+// Mock env module
+jest.mock('~/config/env', () => ({
+  env: {
+    API_BASE_URL: 'https://jsonplaceholder.typicode.com',
+    AVATAR_BASE_URL: 'https://picsum.photos/seed',
+  },
+}));
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
