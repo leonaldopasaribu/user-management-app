@@ -5,10 +5,36 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "react-router";
+} from 'react-router';
+import { Provider } from 'react-redux';
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
-import type { Route } from "./+types/root";
-import "./app.css";
+import type { Route } from './+types/root';
+import { store } from './store/store';
+import './app.css';
+
+const theme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+    background: {
+      default: '#f5f7fa',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#1a202c',
+      secondary: '#4a5568',
+    },
+  },
+  typography: {
+    fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
+  },
+});
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,7 +68,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Outlet />
+      </ThemeProvider>
+    </Provider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
