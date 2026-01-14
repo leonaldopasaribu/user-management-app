@@ -32,40 +32,6 @@ A modern, full-stack user management application built with React Router 7 that 
 - **Code Quality:** [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
 - **Package Manager:** [pnpm](https://pnpm.io/) - Fast, disk space efficient
 
-## 📁 Project Structure
-
-```
-user-management-app/
-├── app/
-│   ├── components/          # Reusable UI components
-│   │   ├── EmptyState.tsx
-│   │   ├── ErrorState.tsx
-│   │   ├── SearchField.tsx
-│   │   ├── UserCard.tsx
-│   │   ├── UserDetailsModal.tsx
-│   │   ├── UserFormModal.tsx
-│   │   └── UserList.tsx
-│   ├── config/              # Configuration files
-│   │   └── env.ts
-│   ├── routes/              # Application routes
-│   │   └── home.tsx
-│   ├── store/               # Redux store and slices
-│   │   ├── hooks.ts
-│   │   ├── store.ts
-│   │   ├── userSlice.ts
-│   │   └── userSlice.test.ts
-│   ├── types/               # TypeScript type definitions
-│   │   └── user.types.ts
-│   ├── app.css              # Global styles
-│   └── root.tsx             # Root component
-├── public/                  # Static assets
-├── .env.example             # Environment variables example
-├── Dockerfile               # Docker configuration
-├── jest.config.ts           # Jest configuration
-├── tsconfig.json            # TypeScript configuration
-└── vite.config.ts           # Vite configuration
-```
-
 ## 🚀 Getting Started
 
 ### Prerequisites
